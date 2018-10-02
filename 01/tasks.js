@@ -27,9 +27,14 @@ function getMinMax(string)
  * @param {number} x номер числа
  * @return {number} число под номером х
  */
-function fibonacciSimple(x) {
-  return x;
+function fibonacciSimple(x) 
+{
+  if (x === 0 || x === 1) 
+    return x;     
+  else 
+    return fibonacciSimple(x - 1) + fibonacciSimple(x - 2);	
 }
+
 
 /* ============================================= */
 
