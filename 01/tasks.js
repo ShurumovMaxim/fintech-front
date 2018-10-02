@@ -90,7 +90,28 @@ function fibonacciWithCache(x)
  * @param  {number} cols количество столбцов
  * @return {string}
  */
-function printNumbers(max, cols) {}
+
+function printNumbers(max, cols) 
+{
+  const rows = Math.ceil(max / cols);
+
+  let table = '';
+
+  for (let i = 0; i < rows; i++) 
+  {
+    for (let j = 0; j < cols; j++) 
+    { 
+        let number = i + (j * rows) + 1;
+        if(number <= max)
+          table += `${number}`.padStart(2) +' ';
+    }
+
+    if(i != rows - 1)
+      table += '\n';
+  }
+
+  return table;
+}
 
 /* ============================================= */
 
