@@ -27,6 +27,7 @@ function getMinMax(string)
  * @param {number} x номер числа
  * @return {number} число под номером х
  */
+
 function fibonacciSimple(x) 
 {
   if (x === 0 || x === 1) 
@@ -44,9 +45,33 @@ function fibonacciSimple(x)
  * @param {number} x номер числа
  * @return {number} число под номером х
  */
-function fibonacciWithCache(x) {
-  return x;
+
+const cache = new Map();
+
+function fibonacciWithCache(x) 
+{
+  if(!cache.has(x))
+  {
+    //console.log('without cache');
+
+    if (x === 0 || x === 1)
+    {
+      cache.set(x, x);  
+      return cache.get(x);
+    }   
+    else 
+    {
+      cache.set(x, fibonacciSimple(x - 1) + fibonacciSimple(x - 2));	
+      return cache.get(x);
+    }
+  }
+  else 
+  {
+    //console.log('cache');
+    return cache.get(x);
+  }
 }
+
 
 /* ============================================= */
 
