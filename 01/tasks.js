@@ -120,7 +120,29 @@ function printNumbers(max, cols)
  * @param  {string} value
  * @return {string}
  */
-function rle(input) {}
+
+function rle(input) 
+{
+  let sum = 1;
+
+  let str_rle = '';
+
+  for (let i = 0; i < input.length; i++) 
+  {
+    if (input[i] === input[i + 1]) 
+      sum++;
+    else
+    {
+      if(sum > 1)
+        str_rle += input[i] + sum;
+      else  
+        str_rle += input[i];
+      
+      sum = 1;
+    }
+  }
+  return str_rle;
+}
 
 module.exports = {
   getMinMax,
