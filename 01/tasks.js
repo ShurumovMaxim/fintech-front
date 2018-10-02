@@ -101,7 +101,7 @@ function printNumbers(max, cols)
   {
     for (let j = 0; j < cols; j++) 
     { 
-        let number = i + (j * rows) + 1;
+        let number = i + (j * rows);
         if(number <= max)
           table += `${number}`.padStart(2) +' ';
     }
