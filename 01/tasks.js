@@ -8,7 +8,17 @@
  * @return {{min: number, max: number}} объект с минимумом и максимумом
  * '1 и 6.45, -2, но 8, а затем 15, то есть 2.7 и -1028' => { min: -1028, max: 15 }
  */
-function getMinMax(string) {}
+
+function getMinMax(string) 
+{
+  //const reg = new RegExp('-?\d+(\.\d+)?', 'g');      
+  const reg = new RegExp('-?[0-9]+(\.[0-9]+)?', 'g');
+  const num = string.match(reg);
+
+  return { min: Math.min.apply(null, num), max: Math.max.apply(null, num) }
+}
+
+//console.log(getMinMax('1 и 6.45, -2, но 8, а затем 15, то есть 2.7 и -1028'));
 
 /* ============================================= */
 
