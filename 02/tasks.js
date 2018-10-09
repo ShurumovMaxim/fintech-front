@@ -25,6 +25,10 @@ function timer(logger = console.log) {
  */
 function customBind(func, context, ...args) {
 
+  return (...arguments_function) => {
+    return func.apply(context, args.concat(arguments_function));
+  };
+  
 }
 
 /*= ============================================ */
