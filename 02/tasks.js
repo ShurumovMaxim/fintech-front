@@ -63,7 +63,13 @@ function sum(x) {
  * @return {boolean}
  */
 function anagram(first, second) {
-  return false;
+
+  if (first.length !== second.length) 
+    return false;
+
+  if(first.split('').sort().join() === second.split('').sort().join())
+    return true;
+  
 }
 
 /*= ============================================ */
