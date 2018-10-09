@@ -121,7 +121,6 @@ function getIntersection(first, second) {
   });
 }
 
-console.log(getIntersection([1, 9, 10, 3, 5, 7], [10, 3, 4]))
 /* ============================================= */
 
 /**
@@ -139,6 +138,21 @@ console.log(getIntersection([1, 9, 10, 3, 5, 7], [10, 3, 4]))
  */
 function isIsomorphic(left, right) {
 
+  if (left.length !== right.length) 
+    return false;
+
+  let diff_char = 0;
+
+  for (let i = 0; i < left.length; i++) {
+
+    if (left[i] !== right[i]) 
+      diff_char++;
+
+    if(diff_char >= 2)
+      return false;
+  }
+
+  return true;
 }
 
 module.exports = {
