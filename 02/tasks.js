@@ -7,7 +7,7 @@
  * Доп. задание: предложите несколько вариантов решения.
  */
 function timer(logger = console.log) {
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     setTimeout(() => {
       logger(i);
     }, 100);
@@ -25,6 +25,10 @@ function timer(logger = console.log) {
  */
 function customBind(func, context, ...args) {
 
+  return (...arguments_function) => {
+    return func.apply(context, args.concat(arguments_function));
+  };
+  
 }
 
 /*= ============================================ */
@@ -37,7 +41,21 @@ function customBind(func, context, ...args) {
  * sum :: void -> Number
  */
 function sum(x) {
-  return 0;
+
+  if (!x)
+    return 0;
+
+  let sum_elements = x;
+
+  f = function sum1(x1){
+    if (x1) {
+     sum_elements += x1;
+      return f;
+    }
+    return sum_elements;
+  };
+
+  return f;
 }
 
 /*= ============================================ */
@@ -49,7 +67,13 @@ function sum(x) {
  * @return {boolean}
  */
 function anagram(first, second) {
-  return false;
+
+  if (first.length !== second.length) 
+    return false;
+
+  if(first.split('').sort().join() === second.split('').sort().join())
+    return true;
+  
 }
 
 /*= ============================================ */
@@ -61,7 +85,19 @@ function anagram(first, second) {
  * @return {Array<number>} массив уникальных значений, отсортированный по возрастанию
  */
 function getUnique(arr) {
-  return [];
+
+  const new_arr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+
+    if (new_arr.indexOf(arr[i]) === -1) {
+      new_arr.push(arr[i]);
+    }
+
+  }
+  return new_arr.sort(function(a, b) {
+    return a - b;
+  });
 }
 
 /**
@@ -71,7 +107,22 @@ function getUnique(arr) {
  * @return {Array<number>} массив уникальных значений, отсортированный по возрастанию
  */
 function getIntersection(first, second) {
-  return [];
+
+  first = getUnique(first);
+  second = getUnique(second);
+  new_arr = [];
+
+  for(let i = 0; i < first.length; i++) {
+
+    if(second.indexOf(first[i]) !== -1) {
+      new_arr.push(first[i]);
+    }
+
+  }
+
+  return new_arr.sort(function(a, b) {
+    return a - b;
+  });
 }
 
 /* ============================================= */
@@ -91,6 +142,21 @@ function getIntersection(first, second) {
  */
 function isIsomorphic(left, right) {
 
+  if (left.length !== right.length) 
+    return false;
+
+  let diff_char = 0;
+
+  for (let i = 0; i < left.length; i++) {
+
+    if (left[i] !== right[i]) 
+      diff_char++;
+
+    if(diff_char >= 2)
+      return false;
+  }
+
+  return true;
 }
 
 module.exports = {
