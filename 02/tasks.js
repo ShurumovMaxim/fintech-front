@@ -1,4 +1,4 @@
-﻿/* =============================
+/* =============================
 =            РЕЛИЗ            =
 ============================= */
 
@@ -37,8 +37,22 @@ function customBind(func, context, ...args) {
  * sum :: void -> Number
  */
 function sum(x) {
-}
 
+  if (!x)
+    return 0;
+
+  let sum_elements = x;
+
+  f = function sum1(x1){
+    if (x1) {
+     sum_elements += x1;
+      return f;
+    }
+    return sum_elements;
+  };
+
+  return f;
+}
 
 /*= ============================================ */
 
