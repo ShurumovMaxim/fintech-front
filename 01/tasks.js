@@ -8,7 +8,17 @@
  * @return {{min: number, max: number}} объект с минимумом и максимумом
  * '1 и 6.45, -2, но 8, а затем 15, то есть 2.7 и -1028' => { min: -1028, max: 15 }
  */
-function getMinMax(string) {}
+
+function getMinMax(string) 
+{
+  //const reg = new RegExp('-?\d+(\.\d+)?', 'g');      
+  const reg = new RegExp('-?[0-9]+(\.[0-9]+)?', 'g');
+  const num = string.match(reg);
+
+  return { min: Math.min.apply(null, num), max: Math.max.apply(null, num) }
+}
+
+//console.log(getMinMax('1 и 6.45, -2, но 8, а затем 15, то есть 2.7 и -1028'));
 
 /* ============================================= */
 
@@ -17,9 +27,15 @@ function getMinMax(string) {}
  * @param {number} x номер числа
  * @return {number} число под номером х
  */
-function fibonacciSimple(x) {
-  return x;
+
+function fibonacciSimple(x) 
+{
+  if (x === 0 || x === 1) 
+    return x;     
+  else 
+    return fibonacciSimple(x - 1) + fibonacciSimple(x - 2);	
 }
+
 
 /* ============================================= */
 
@@ -29,9 +45,33 @@ function fibonacciSimple(x) {
  * @param {number} x номер числа
  * @return {number} число под номером х
  */
-function fibonacciWithCache(x) {
-  return x;
+
+const cache = new Map();
+
+function fibonacciWithCache(x) 
+{
+  if(!cache.has(x))
+  {
+    //console.log('without cache');
+
+    if (x === 0 || x === 1)
+    {
+      cache.set(x, x);  
+      return cache.get(x);
+    }   
+    else 
+    {
+      cache.set(x, fibonacciSimple(x - 1) + fibonacciSimple(x - 2));	
+      return cache.get(x);
+    }
+  }
+  else 
+  {
+    //console.log('cache');
+    return cache.get(x);
+  }
 }
+
 
 /* ============================================= */
 
@@ -50,7 +90,28 @@ function fibonacciWithCache(x) {
  * @param  {number} cols количество столбцов
  * @return {string}
  */
-function printNumbers(max, cols) {}
+
+function printNumbers(max, cols) 
+{
+  const rows = Math.ceil(max / cols);
+
+  let table = '';
+
+  for (let i = 0; i < rows; i++) 
+  {
+    for (let j = 0; j < cols; j++) 
+    { 
+        let number = i + (j * rows);
+        if(number <= max)
+          table += `${number}`.padStart(2) +' ';
+    }
+
+    if(i != rows - 1)
+      table += '\n';
+  }
+
+  return table;
+}
 
 /* ============================================= */
 
@@ -59,7 +120,29 @@ function printNumbers(max, cols) {}
  * @param  {string} value
  * @return {string}
  */
-function rle(input) {}
+
+function rle(input) 
+{
+  let sum = 1;
+
+  let str_rle = '';
+
+  for (let i = 0; i < input.length; i++) 
+  {
+    if (input[i] === input[i + 1]) 
+      sum++;
+    else
+    {
+      if(sum > 1)
+        str_rle += input[i] + sum;
+      else  
+        str_rle += input[i];
+      
+      sum = 1;
+    }
+  }
+  return str_rle;
+}
 
 module.exports = {
   getMinMax,
