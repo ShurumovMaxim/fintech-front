@@ -91,7 +91,9 @@ function getUnique(arr) {
     }
 
   }
-  return new_arr.sort();
+  return new_arr.sort(function(a, b) {
+    return a - b;
+  });
 }
 
 /**
@@ -101,9 +103,25 @@ function getUnique(arr) {
  * @return {Array<number>} массив уникальных значений, отсортированный по возрастанию
  */
 function getIntersection(first, second) {
-  return [];
+
+  first = getUnique(first);
+  second = getUnique(second);
+  new_arr = [];
+
+  for(let i = 0; i < first.length; i++) {
+
+    if(second.indexOf(first[i]) !== -1) {
+      new_arr.push(first[i]);
+    }
+
+  }
+
+  return new_arr.sort(function(a, b) {
+    return a - b;
+  });
 }
 
+console.log(getIntersection([1, 9, 10, 3, 5, 7], [10, 3, 4]))
 /* ============================================= */
 
 /**
